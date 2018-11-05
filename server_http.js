@@ -15,6 +15,9 @@ var clients = [];
 // create the server
 var wsServer = new WebSocketServer.Server({server});
 
+//Steps Since Clear
+var steps = [];
+
 //WebSocket server
 wsServer.on('connection', function(connection) {
 
@@ -46,10 +49,22 @@ class Client {
 		
 		//Getting Message From Client
 		connection.on('message', function(msg){
-
+			
 			if (msg == "setup"){
-				//Send picture//
-			} else {
+				steps.forEach(function(e){
+					connection.send(e);
+				});
+			}else if(msg == "back"){
+				
+				if(steps.length > 0) steps.pop(); //Remove Last Step
+				sendToAll("clear black"); //Clear Screen
+				
+				//Send All Steps Without last
+				steps.forEach(function(e){
+					sendToAll(e);
+				});
+			}else {
+				steps.push(msg);
 				sendToAll(msg);
 			}
 		});

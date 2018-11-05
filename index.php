@@ -96,6 +96,13 @@
 					</div>
 				</li>
 				
+				<!-- Back Tool -->
+				<li class="tool-item">
+					<div class="item-border">
+						<input type="button" class="back item" onclick="back_bt();" ></input>
+					</div>
+				</li>
+				
 				<!-- Canvas Color -->
 				<li class="tool-item">
 					<div class="item-border color-border">
@@ -109,6 +116,7 @@
 						<input type="button" class="clear item" onclick="clear_bt();" ></input>
 					</div>
 				</li>
+				
 			</ul>
 		</div>
 	</div><!-- Left Toolbar Box -->

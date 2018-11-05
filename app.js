@@ -311,6 +311,9 @@ function drawNet(args){
 }
 
 //TOOLBAR LISTENERS//
+function back_bt(){
+	sendToServer("back");
+}
 function clear_bt(){
 	sendToServer("clear " + tool.color_clear);
 	tool.startNew();
