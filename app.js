@@ -278,7 +278,7 @@ class Mouse {
 function connect(){
 	
 	//Connection for release
-	connection = new WebSocket("wss:localhost:666");
+	connection = new WebSocket("ws:localhost:666");
 	
 	connection.onopen = function(){
 		connected = true;
