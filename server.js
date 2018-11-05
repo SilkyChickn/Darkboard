@@ -5,8 +5,8 @@ var https = require('https');
 var fs = require('fs');
 
 var server = https.createServer({
-	cert: fs.readFileSync('../../ssl/public.pem'),
-	key: fs.readFileSync('../../ssl/private.pem')
+	cert: fs.readFileSync('/var/www/html/ssl/public.pem'),
+	key: fs.readFileSync('/var/www/html/ssl/private.pem')
 });
 server.listen(666);
 
