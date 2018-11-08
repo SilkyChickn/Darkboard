@@ -1,17 +1,23 @@
 var canvas, context;
 var tool, board, mouse;
 var connection, connected;
+var canvasX = 1024, canvasY = 768;
+var aspectX, aspectY;
 
 //INITIAL FUNCTION//
 function start(){
+	
+	aspectX = 1.0 * document.body.clientWidth / canvasX;
+	aspectY = 1.0 * document.body.clientHeight / canvasY;
 	
 	//Get context
 	canvas = document.getElementById("board");
 	context = canvas.getContext("2d");
 	
 	//Stretch canvas to window size
-	canvas.width = document.body.clientWidth;
-	canvas.height = document.body.clientHeight;
+	//canvas.width = 800;//document.body.clientWidth;
+	//canvas.height = 600;//document.body.clientHeight;
+	//canvas.scale(1, 1);
 	
 	//Create tool
 	tool = new Tool();
@@ -268,8 +274,8 @@ class Mouse {
 	setPosition(x, y) {
 		this.oldx = this.x;
 		this.oldy = this.y;
-		this.x = x;
-		this.y = y;
+		this.x = x / aspectX;
+		this.y = y / aspectY;
 	}
 	
 }

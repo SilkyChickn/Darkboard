@@ -137,7 +137,7 @@
 	<div id="canvas-container">
 	
 		<!-- Darkboard Canvas -->
-		<canvas id="board" onmousemove="mousemove(event);" onmousedown="mousedown(event);" onmouseup="mouseup(event);" onmouseleave="mouseup(event);" >
+		<canvas id="board" width="1024" height="768" onmousemove="mousemove(event);" onmousedown="mousedown(event);" onmouseup="mouseup(event);" onmouseleave="mouseup(event);" >
 			Your browser is shit and does not supporting canvas!
 		</canvas><!-- Darkboard Canvas -->
 	</div><!-- Canvas Container -->
