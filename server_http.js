@@ -43,7 +43,7 @@ function sendToAll(msg){
 }
 
 class Client {
-
+	
 	constructor(connection){
 		this.connection = connection;
 		
@@ -54,6 +54,10 @@ class Client {
 				steps.forEach(function(e){
 					connection.send(e);
 				});
+			}else if(msg.startsWith("clear ")){
+				steps = []; //Clear Steps when an Client clears the Screen
+				steps.push(msg);
+				sendToAll(msg);
 			}else if(msg == "back"){
 				
 				if(steps.length > 0) steps.pop(); //Remove Last Step
