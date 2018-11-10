@@ -125,7 +125,7 @@
 	<div id="toolbar-box-bottom">
 		<div class="toolbar">
 			<div class="range-slider-container">
-				<p class="slider-title">Pen size: <span id="slider-value"></span></p>
+				<p class="slider-title">Tool size: <span id="slider-value"></span></p>
 				<div class="range-slider">
 					<input type="range" min="1" max="100" value="5" class="slider" id="rangeSlider"></input>
 				</div>
@@ -137,7 +137,7 @@
 	<div id="canvas-container">
 	
 		<!-- Darkboard Canvas -->
-		<canvas id="board" width="1024" height="768" onmousemove="mousemove(event);" onmousedown="mousedown(event);" onmouseup="mouseup(event);" onmouseleave="mouseup(event);" >
+		<canvas id="board" width="2560" height="1440" onmousemove="mousemove(event);" onmousedown="mousedown(event);" onmouseup="mouseup(event);" onmouseleave="mouseup(event);" >
 			Your browser is shit and does not supporting canvas!
 		</canvas><!-- Darkboard Canvas -->
 	</div><!-- Canvas Container -->

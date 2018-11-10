@@ -1,7 +1,7 @@
 var canvas, context;
 var tool, board, mouse;
 var connection, connected;
-var canvasX = 1024, canvasY = 768;
+var canvasX = 2560, canvasY = 1440;
 var aspectX, aspectY;
 
 //INITIAL FUNCTION//
@@ -13,11 +13,6 @@ function start(){
 	//Get context
 	canvas = document.getElementById("board");
 	context = canvas.getContext("2d");
-	
-	//Stretch canvas to window size
-	//canvas.width = 800;//document.body.clientWidth;
-	//canvas.height = 600;//document.body.clientHeight;
-	//canvas.scale(1, 1);
 	
 	//Create tool
 	tool = new Tool();
@@ -134,7 +129,9 @@ class Tool {
 	constructor(){
 		this.type = "pen";
 		
-		this.thickness = document.getElementById("rangeSlider").value;
+		this.thicknessAdd = 5;
+		this.thicknessRemove = 20;
+		
 		this.color_draw = document.getElementById("pickerDraw").value;
 		this.color_clear = document.getElementById("pickerClear").value;
 		
@@ -153,6 +150,7 @@ class Tool {
 	
 	setType(type){
 		this.type = type;
+		updateSliderValue();
 	}
 	
 	startNew(){
@@ -162,22 +160,22 @@ class Tool {
 	
 	draw(){
 		if(this.type == "pen")
-			sendToServer("line " + mouse.oldx + " " + mouse.oldy + " " + mouse.x + " " + mouse.y + " " + this.thickness + " " + this.color_draw);
+			sendToServer("line " + mouse.oldx + " " + mouse.oldy + " " + mouse.x + " " + mouse.y + " " + this.thicknessAdd + " " + this.color_draw);
 		else if(this.type == "rubber")
-			sendToServer("line " + mouse.oldx + " " + mouse.oldy + " " + mouse.x + " " + mouse.y + " " + this.thickness + " " + this.color_clear);
+			sendToServer("line " + mouse.oldx + " " + mouse.oldy + " " + mouse.x + " " + mouse.y + " " + this.thicknessRemove + " " + this.color_clear);
 		
 	}
 	
 	enter(){
 		if(this.type == "text"){
 			this.cursorPosX = this.textStartX;
-			this.cursorPosY += (this.thickness * this.textMultiplier);
+			this.cursorPosY += (this.thicknessAdd * this.textMultiplier);
 		}
 	}
 	
 	draw_key(key){
 		if(this.type == "text"){
-			var text_size = (this.thickness * this.textMultiplier);
+			var text_size = (this.thicknessAdd * this.textMultiplier);
 			var font = "Calibri";
 			
 			sendToServer("text " + this.cursorPosX + " " + this.cursorPosY + " " + key + " " + font + " " + text_size + " " + this.color_draw);
@@ -191,7 +189,7 @@ class Tool {
 	draw_click(){
 		if(this.type == "line"){
 			if(!this.newLine)
-				sendToServer("line " + mouse.last_clicked_x + " " + mouse.last_clicked_y + " " + mouse.x + " " + mouse.y + " " + this.thickness + " " + this.color_draw);
+				sendToServer("line " + mouse.last_clicked_x + " " + mouse.last_clicked_y + " " + mouse.x + " " + mouse.y + " " + this.thicknessAdd + " " + this.color_draw);
 			this.newLine = false;
 		}else{
 			this.newLine = true;
@@ -199,7 +197,7 @@ class Tool {
 		
 		if(this.type == "table"){
 			if(!this.newTable){
-				sendToServer("table " + mouse.last_clicked_x + " " + mouse.last_clicked_y + " " + mouse.x + " " + mouse.y + " " + document.getElementById("tableColumn").value + " " + document.getElementById("tableRow").value + " " + this.thickness + " " + this.color_draw);
+				sendToServer("table " + mouse.last_clicked_x + " " + mouse.last_clicked_y + " " + mouse.x + " " + mouse.y + " " + document.getElementById("tableColumn").value + " " + document.getElementById("tableRow").value + " " + this.thicknessAdd + " " + this.color_draw);
 				this.startNew();
 			}else
 				this.newTable = false;
@@ -214,13 +212,28 @@ class Tool {
 		}
 		
 		if(this.type == "stamp"){
-			var imageSize = this.thickness * this.stampMultiplier;
+			var imageSize = this.thicknessAdd * this.stampMultiplier;
 			var x = mouse.x -(imageSize / 2);
 			var y = mouse.y -(imageSize / 2);
 			sendToServer("stamp " + x + " " + y + " " + this.stamp + " " + imageSize);
 		}
 	}
 	
+}
+
+//SLIDER UPDATE//
+function updateSliderValue(){
+	
+	//Get Elements
+	var slider = document.getElementById("rangeSlider");
+	var output = document.getElementById("slider-value");
+	
+	//Change Thickness Value of Slider
+	if(tool.type == "rubber") slider.value = tool.thicknessRemove;
+	else slider.value = tool.thicknessAdd;
+	
+	//Change Thickness Value of Slider Header
+	output.innerHTML = slider.value;
 }
 
 //KEY LISTENERS//
@@ -349,7 +362,9 @@ function pickerC_changed(e){
 	tool.startNew();
 }
 function sliderT_changed(e){
-	tool.thickness = e.target.value;
+	if(tool.type == "rubber") tool.thicknessRemove = e.target.value;
+	else tool.thicknessAdd = e.target.value;
+	
 }
 function stamp_bt(img){
 	tool.setType("stamp");
