@@ -1,3 +1,2 @@
 - Mauszeiger zum Zeigen
-- Pensize pro Tool Speichern
 - Capture Button, Canvas Speichern
