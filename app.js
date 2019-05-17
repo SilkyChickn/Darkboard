@@ -129,8 +129,8 @@ class Tool {
 	constructor(){
 		this.type = "pen";
 		
-		this.thicknessAdd = 5;
-		this.thicknessRemove = 20;
+		this.thicknessAdd = 4;
+		this.thicknessRemove = 40;
 		
 		this.color_draw = document.getElementById("pickerDraw").value;
 		this.color_clear = document.getElementById("pickerClear").value;
