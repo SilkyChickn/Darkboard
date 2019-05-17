@@ -127,7 +127,7 @@
 			<div class="range-slider-container">
 				<p class="slider-title">Tool size: <span id="slider-value"></span></p>
 				<div class="range-slider">
-					<input type="range" min="1" max="100" value="5" class="slider" id="rangeSlider"></input>
+					<input type="range" min="1" max="100" value="4" class="slider" id="rangeSlider"></input>
 				</div>
 			</div>
 		</div>
