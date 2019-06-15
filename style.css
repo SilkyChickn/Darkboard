@@ -20,14 +20,14 @@ body {
 				 "Segoe UI Emoji","Segoe UI Symbol";
 }
 
-/*	Main Styles ---------------------------------------------------- */
+/* Main Styles ---------------------------------------------------- */
 
 #darkboard-box-top {
 	position: absolute;
 	z-index: 10;
 	top: 15px;
-	left:15px;
-	width: -moz-available;
+	left: 15px;
+	width: 100vw;
 }
 
 .logo {
@@ -56,12 +56,11 @@ h2 {
 	letter-spacing: 10px;
 	font-weight: 450;
 	font-size: 20px;
-	color: #fff;
 	height: 30px;
 	padding: 5px;
 }
 
-/*	Toolbar Left --------------------------------------------------- */
+/* Toolbar Left --------------------------------------------------- */
 
 #toolbar-box-left {
 	position: absolute;
@@ -128,33 +127,19 @@ h2 {
 	cursor: pointer;
 }
 
-.pencil {
-	background-image: url(icons/white-pencil.png);
-}
+.pencil	{ background-image: url(icons/white-pencil.png); }
 
-.line {
-	background-image: url(icons/white-line.png);
-}
+.line	{ background-image: url(icons/white-line.png); }
 
-.table {
-	background-image: url(icons/white-table.png);
-}
+.table	{ background-image: url(icons/white-table.png); }
 
-.rubber {
-	background-image: url(icons/white-rubber.png);
-}
+.rubber	{ background-image: url(icons/white-rubber.png); }
 
-.clear {
-	background-image: url(icons/white-clear.png);
-}
+.clear	{ background-image: url(icons/white-clear.png); }
 
-.back {
-	background-image: url(icons/white-back.png);
-}
+.back	{ background-image: url(icons/white-back.png); }
 
-.text {
-	background-image: url(icons/white-text.png);
-}
+.text	{ background-image: url(icons/white-text.png); }
 
 .color-item {
 	-webkit-appearance: none;
@@ -170,26 +155,26 @@ h2 {
 /* Dropdown Content ------------------------------------------------ */
 
 .dropbtn {
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-    display: none;
-    position: absolute;
+	display: none;
+	position: absolute;
 	padding: 5px;
-    background-color: #222729;
+	background-color: #222729;
 	border-radius: 3px;
-    z-index: 20;
+	z-index: 20;
 	top: -8px;
 	left: 70px;
 }
@@ -246,10 +231,9 @@ h2 {
 
 .table-btn:hover {
 	background-color: #0089bc;
-	
 }
 
-/*	Toolbar Bottom ------------------------------------------------- */
+/* Toolbar Bottom ------------------------------------------------- */
 
 #toolbar-box-bottom {
 	position: absolute;
@@ -269,33 +253,33 @@ h2 {
 
 .slider {
 	-webkit-appearance: none;
-    appearance: none;
+	appearance: none;
 	margin: 0px;
-    width: 220px;
-    height: 5px;
+	width: 220px;
+	height: 5px;
 	border-radius: 5px;
-    outline: none;
+	outline: none;
 }
 
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #fff;
-    cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #fff;
+	cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #fff;
-    cursor: pointer;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #fff;
+	cursor: pointer;
 }
 
-/*	Canvas --------------------------------------------------------- */
+/* Canvas --------------------------------------------------------- */
 
 #canvas-container {
 	position: absolute;
