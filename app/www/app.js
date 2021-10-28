@@ -357,7 +357,7 @@ class Mouse {
 //NETWORK FUNCTIONS//
 function connect() {
     //Connection for release
-    connection = new WebSocket("wss:darkboard-v1.dark-echoes.de:666");
+    connection = new WebSocket("wss:darkboard-v1.dark-echoes.de:2567");
 
     connection.onopen = function () {
         connected = true;

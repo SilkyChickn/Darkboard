@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
-var WebSocketServer = require('ws');
-var http = require('http');
-var fs = require('fs');
+var WebSocketServer = require("ws");
+var http = require("http");
+var fs = require("fs");
 
 var server = http.createServer();
-server.listen(666);
+server.listen(2567);
 
 console.log("Server Started...");
 
@@ -13,17 +13,16 @@ console.log("Server Started...");
 var clients = [];
 
 // create the server
-var wsServer = new WebSocketServer.Server({server});
+var wsServer = new WebSocketServer.Server({ server });
 
 //Steps Since Clear
 var steps = [];
 
 //WebSocket server
-wsServer.on('connection', function(connection) {
-
-	//New Client Connected
-	clients.push(new Client(connection));
-	console.log("New Client Connected!");
+wsServer.on("connection", function (connection) {
+    //New Client Connected
+    clients.push(new Client(connection));
+    console.log("New Client Connected!");
 });
 
 /*
@@ -36,52 +35,49 @@ function sendToAllExceptCon(connection, msg){
 }
 */
 
-function sendToAll(msg){
-	clients.forEach(function(c){
-		c.send(msg);
-	});
+function sendToAll(msg) {
+    clients.forEach(function (c) {
+        c.send(msg);
+    });
 }
 
 class Client {
-	
-	constructor(connection){
-		this.connection = connection;
-		
-		//Getting Message From Client
-		connection.on('message', function(msg){
-			
-			if (msg == "setup"){
-				steps.forEach(function(e){
-					connection.send(e);
-				});
-			}else if(msg.startsWith("clear ")){
-				steps = []; //Clear Steps when an Client clears the Screen
-				steps.push(msg);
-				sendToAll(msg);
-			}else if(msg == "back"){
-				
-				if(steps.length > 0) steps.pop(); //Remove Last Step
-				sendToAll("clear black"); //Clear Screen
-				
-				//Send All Steps Without last
-				steps.forEach(function(e){
-					sendToAll(e);
-				});
-			}else {
-				steps.push(msg);
-				sendToAll(msg);
-			}
-		});
-		
-		//Client Disconnected
-		connection.on('close', function(connection) {
-			console.log("Client Disconnected!");
-		});
-	}
-	
-	send(msg){
-		try{
-			this.connection.send(msg);
-		}catch(e){}
-	}
+    constructor(connection) {
+        this.connection = connection;
+
+        //Getting Message From Client
+        connection.on("message", function (msg) {
+            if (msg == "setup") {
+                steps.forEach(function (e) {
+                    connection.send(e);
+                });
+            } else if (msg.startsWith("clear ")) {
+                steps = []; //Clear Steps when an Client clears the Screen
+                steps.push(msg);
+                sendToAll(msg);
+            } else if (msg == "back") {
+                if (steps.length > 0) steps.pop(); //Remove Last Step
+                sendToAll("clear black"); //Clear Screen
+
+                //Send All Steps Without last
+                steps.forEach(function (e) {
+                    sendToAll(e);
+                });
+            } else {
+                steps.push(msg);
+                sendToAll(msg);
+            }
+        });
+
+        //Client Disconnected
+        connection.on("close", function (connection) {
+            console.log("Client Disconnected!");
+        });
+    }
+
+    send(msg) {
+        try {
+            this.connection.send(msg);
+        } catch (e) {}
+    }
 }

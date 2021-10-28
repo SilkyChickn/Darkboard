@@ -12,7 +12,7 @@ services:
         networks:
             - darkboard-v1
         ports:
-            - 666:666/tcp
+            - 2567:2567/tcp
 
         # Keep container running
         stdin_open: true

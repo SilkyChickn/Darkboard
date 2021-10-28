@@ -26,7 +26,7 @@ services:
             traefik.http.routers.darkboard-v1-server.tls.certresolver: "lets-encrypt"
             traefik.http.routers.darkboard-v1-server.tls.domains[0].main: "dark-echoes.de"
             traefik.http.routers.darkboard-v1-server.tls.domains[0].sans: "darkboard-v1.dark-echoes.de"
-            traefik.http.services.darkboard-v1-server.loadbalancer.server.port: "666"
+            traefik.http.services.darkboard-v1-server.loadbalancer.server.port: "2567"
 
     darkboard-v1-frontend:
         # Container config
