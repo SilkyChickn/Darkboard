@@ -1,6 +1,0 @@
-- Mauszeiger zum Zeigen
-- Stepbuffer Verbessern...
-- Pensize pro Tool Speichern
-- Rückgängig verbessern...
-- Stebuffer Clear Button?
-- Capture Button, Canvas Speichern
