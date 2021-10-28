@@ -1,0 +1,14 @@
+{
+    "name": "darkboard",
+    "version": "1.0.0",
+    "description": "Node.js for the Darkboard server.",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server_http.js"
+    },
+    "dependencies": {
+        "ws": "7.1.2",
+        "fs": "0.0.1-security",
+        "http": "0.0.0"
+    }
+}

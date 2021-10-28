@@ -1,0 +1,62 @@
+version: "3.5"
+
+services:
+    darkboard-v1-server:
+        # Container config
+        build:
+            context: server
+        container_name: darkboard-v1-server
+        restart: unless-stopped
+
+        # Networking
+        networks:
+            - darkboard-v1
+            - traefik-proxy
+
+        # Keep container running
+        stdin_open: true
+
+        labels:
+            # Traeffik Router labels.
+            traefik.enable: "true"
+            traefik.docker.network: "traefik-proxy"
+            traefik.http.routers.darkboard-v1-server.entrypoints: "socket"
+            traefik.http.routers.darkboard-v1-server.rule: "Host(`darkboard-v1.dark-echoes.de`)"
+            traefik.http.routers.darkboard-v1-server.tls: "true"
+            traefik.http.routers.darkboard-v1-server.tls.certresolver: "lets-encrypt"
+            traefik.http.routers.darkboard-v1-server.tls.domains[0].main: "dark-echoes.de"
+            traefik.http.routers.darkboard-v1-server.tls.domains[0].sans: "darkboard-v1.dark-echoes.de"
+            traefik.http.services.darkboard-v1-server.loadbalancer.server.port: "666"
+
+    darkboard-v1-frontend:
+        # Container config
+        build:
+            context: app
+        container_name: darkboard-v1-frontend
+        restart: unless-stopped
+
+        networks:
+            - darkboard-v1
+            - traefik-proxy
+
+        # Keep container running
+        stdin_open: true
+
+        labels:
+            # Traeffik Router labels.
+            traefik.enable: "true"
+            traefik.docker.network: "traefik-proxy"
+            traefik.http.routers.darkboard-v1-frontend.entrypoints: "https"
+            traefik.http.routers.darkboard-v1-frontend.rule: "Host(`darkboard-v1.dark-echoes.de`)"
+            traefik.http.routers.darkboard-v1-frontend.tls: "true"
+            traefik.http.routers.darkboard-v1-frontend.tls.certresolver: "lets-encrypt"
+            traefik.http.routers.darkboard-v1-frontend.tls.domains[0].main: "dark-echoes.de"
+            traefik.http.routers.darkboard-v1-frontend.tls.domains[0].sans: "darkboard-v1.dark-echoes.de"
+            traefik.http.services.darkboard-v1-frontend.loadbalancer.server.port: "80"
+
+networks:
+    darkboard-v1:
+        name: darkboard-v1
+    traefik-proxy:
+        external:
+            name: traefik-proxy

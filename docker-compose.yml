@@ -1,0 +1,37 @@
+version: "3.5"
+
+services:
+    darkboard-v1-server:
+        # Container config
+        build:
+            context: server
+        container_name: darkboard-v1-server
+        restart: unless-stopped
+
+        # Networking
+        networks:
+            - darkboard-v1
+        ports:
+            - 666:666/tcp
+
+        # Keep container running
+        stdin_open: true
+
+    darkboard-v1-frontend:
+        # Container config
+        build:
+            context: app
+        container_name: darkboard-v1-frontend
+        restart: unless-stopped
+
+        networks:
+            - darkboard-v1
+        ports:
+            - 80:80/tcp
+
+        # Keep container running
+        stdin_open: true
+
+networks:
+    darkboard-v1:
+        name: darkboard-v1
